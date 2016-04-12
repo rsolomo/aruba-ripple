@@ -1,0 +1,8 @@
+[package]
+name = "aruba_ripple"
+version = "0.0.0"
+authors = ["Ray Solomon <raybsolomon@gmail.com>"]
+
+[dependencies]
+hyper = "0.8"
+url = "0.5"
