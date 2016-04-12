@@ -29,6 +29,18 @@ fn credentials() -> Credentials {
 fn login() {
     let c = credentials();
     let mut client = Client::new(c.origin);
-    let res = client.login(&c.username, &c.password).unwrap();
-    assert!(res.status.is_redirection());
+    let login = client.login(&c.username, &c.password).unwrap();
+    assert!(login.status.is_redirection());
+}
+
+#[test]
+fn get() {
+    let c = credentials();
+    let mut client = Client::new(c.origin);
+    client.login(&c.username, &c.password).unwrap();
+    let mut stats = client.get("amp_stats.xml", None).unwrap();
+    let mut xml = String::new();
+    stats.read_to_string(&mut xml).unwrap();
+    println!("{}", xml);
+    assert!(xml.contains("<amp:amp_stats"));
 }

@@ -38,9 +38,7 @@ impl Client {
         let body = url::form_urlencoded::serialize(vec![("credential_0", username),
                                                         ("credential_1", password),
                                                         ("destination", "/")]);
-
         let s = format!("{}/LOGIN", self.origin);
-
         let res_result = self.client
                              .post(&s)
                              .body(&body)
@@ -62,5 +60,23 @@ impl Client {
         }
 
         Ok(res)
+    }
+
+    pub fn get(&self, path: &str, query: Option<&str>) -> Result<Response, ()> {
+        let s = match query {
+            Some(query) => format!("{}/{}?{}", self.origin, path, query),
+            None => format!("{}/{}", self.origin, path)
+        };
+        let res_result = self.client
+                             .get(&s)
+                             .header(self.cookie.clone())
+                             .send();
+
+        Ok(match res_result {
+            Ok(x) => x,
+            Err(_) => {
+                return Err(());
+            }
+        })
     }
 }
