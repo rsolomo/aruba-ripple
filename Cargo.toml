@@ -2,6 +2,12 @@
 name = "aruba_ripple"
 version = "0.0.0"
 authors = ["Ray Solomon <raybsolomon@gmail.com>"]
+license = "MIT/Apache-2.0"
+readme = "README.md"
+repository = "https://github.com/rsolomo/aruba-ripple"
+homepage = "https://github.com/rsolomo/aruba-ripple"
+description = "An API client for Aruba Airwave"
+keywords = ["aruba", "airwave"]
 
 [dependencies]
 hyper = "0.8"
