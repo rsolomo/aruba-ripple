@@ -5,6 +5,7 @@ use hyper::header::{Cookie, ContentType, SetCookie};
 use url::form_urlencoded;
 use error::Error;
 
+/// Airwave API Client
 #[derive(Debug)]
 pub struct Client {
     cookie: Cookie,
@@ -13,6 +14,7 @@ pub struct Client {
 }
 
 impl Client {
+    /// Creates a new API client.
     pub fn new<S: Into<String>>(origin: S) -> Self {
         let mut hyper_client = hyper::Client::new();
         hyper_client.set_redirect_policy(RedirectPolicy::FollowNone);
@@ -24,6 +26,8 @@ impl Client {
         }
     }
 
+    /// Creates a new API client, with a provided Hyper client.
+    /// This is useful for having the option of changing settings such as timeouts.
     pub fn with_client<S: Into<String>>(origin: S, mut hyper_client: hyper::Client) -> Self {
         hyper_client.set_redirect_policy(RedirectPolicy::FollowNone);
 
@@ -34,6 +38,7 @@ impl Client {
         }
     }
 
+    /// Logs into the Airwave API.
     pub fn login(&mut self, username: &str, password: &str) -> Result<Response, Error> {
         let body = form_urlencoded::serialize(vec![("credential_0", username),
                                                    ("credential_1", password),
@@ -58,6 +63,7 @@ impl Client {
         Ok(res)
     }
 
+    /// Runs a get request against the Airwave API.
     pub fn get(&self, path: &str, query: Option<&str>) -> Result<Response, Error> {
         let s = match query {
             Some(query) => format!("{}/{}?{}", self.origin, path, query),

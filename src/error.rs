@@ -3,9 +3,12 @@ use std::fmt;
 use std::fmt::{Display, Formatter};
 use hyper;
 
+/// Airwave API client errors
 #[derive(Debug)]
 pub enum Error {
+    /// An authentication error
     Authentication,
+    /// An HTTP error from Hyper
     Hyper(hyper::error::Error),
 }
 
