@@ -1,6 +1,7 @@
 # aruba-ripple
 
 [![Build Status](https://travis-ci.org/rsolomo/aruba-ripple.svg?branch=master)](https://travis-ci.org/rsolomo/aruba-ripple)
+[![](http://meritbadge.herokuapp.com/aruba_ripple)](https://crates.io/crates/aruba_ripple)
 
 Aruba Airwave API Client
 
